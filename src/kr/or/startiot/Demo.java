@@ -12,12 +12,13 @@ public class Demo {
 	static int temperature=0;
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+		Runtime rt= Runtime.getRuntime();
+		rt.exec("gpio mode 0 out");
 		final IWF device = new IWF("55555.5555.RP09");
 
 		device.register();
 
 		while(true){
-			Runtime rt= Runtime.getRuntime();
 			Process p=rt.exec("python /home/pi/lib/dht.py");
 			BufferedReader bri = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			if((line = bri.readLine()) != null){
