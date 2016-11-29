@@ -12,12 +12,46 @@ public class Demo {
 	static int temperature=0;
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		Runtime rt= Runtime.getRuntime();
+		IWF device = new IWF("55555.5555.RP09");
+		Runtime rt = Runtime.getRuntime();
 		rt.exec("gpio mode 0 out");
-		final IWF device = new IWF("55555.5555.RP09");
-
+		rt.exec("gpio mode 7 in");
 		device.register();
+		/* 제어 명령
+		AnyArgType command = new AnyArgType();
+		command.setName("switch");
+		command.setValue("initial_value");
+		try
+		{
+			device.putControl("control", M2MCmdType.DOWNLOAD, M2MExecModeType.IMMEDIATEONCE, new AnyArgType[] { command });
+		}
+		catch (M2MException e)
+		{
+			e.printStackTrace();
+		}
+		device.addCmdListener(new CmdListener()
+		{
+			String power;
 
+			public void excute(Map<String, String> cmd, NotifyResponse response)
+			{
+				try
+				{
+					Runtime rt = Runtime.getRuntime();
+					this.power = ((String)cmd.get("switch"));
+					if ("OFF".equals(this.power)) {
+						rt.exec("gpio write 0 0");
+					} else {
+						rt.exec("gpio write 0 1");
+					}
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+		});*/
+		
 		while(true){
 			Process p=rt.exec("python /home/pi/lib/dht.py");
 			BufferedReader bri = new BufferedReader(new InputStreamReader(p.getInputStream()));
