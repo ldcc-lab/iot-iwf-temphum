@@ -12,12 +12,12 @@ public class Demo {
 	static int temperature=0;
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		IWF device = new IWF("55555.5555.RP09");
+		IWF device = new IWF("00000.0001.ldcc");
 		Runtime rt = Runtime.getRuntime();
 		rt.exec("gpio mode 0 out");
 		rt.exec("gpio mode 7 in");
 		device.register();
-		/* 제어 명령
+		/* �젣�뼱 紐낅졊
 		AnyArgType command = new AnyArgType();
 		command.setName("switch");
 		command.setValue("initial_value");
@@ -68,7 +68,7 @@ public class Demo {
 			bri.close();
 			p.waitFor();
 			device.putContent("sensor", "{\"temperature\":"+temperature+",\"humidity\":"+ humidity+"}");
-			Thread.sleep(1000);
+			Thread.sleep(30000);
 		}
 	}
 
